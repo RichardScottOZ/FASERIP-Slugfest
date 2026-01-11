@@ -28,6 +28,12 @@ You can run these notebooks online without installation using Binder:
 3. Run: `jupyter notebook`
 4. Open the desired notebook from the browser interface
 
+**Note**: Some notebooks reference data files. If you get file not found errors:
+- The notebooks expect to find data files in their directory or parent directory
+- Data files are now in the `../data/` directory
+- Update paths in notebook cells as needed (e.g., `'benriely.csv'` → `'../data/benriely.csv'`)
+- Or copy needed CSV files to the notebooks directory
+
 ## Output
 
 The character generator notebooks can create characters in two formats:
