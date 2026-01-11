@@ -1,99 +1,181 @@
-# FASERIP-Slugfest
-A fighting simulator for the FASERIP and other compatible RPGs..
+# FASERIP Slugfest
 
-# Installation
-- git clone
-- change directory to DnD-Battler
-- pip install .
-- pip install -e . to tinker with code.
+A combat simulator and character generator for the FASERIP RPG system and other compatible superhero RPGs.
 
-# Tests / Examples
-- change to the DnD-Battler directory
-- python runtestFASERIP.py
-  - the below loads two characters that are in beastiaryFASERIP.csv and runs 100 battles
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bluetyson/FASERIP-Slugfest/HEAD?urlpath=https%3A%2F%2Fgithub.com%2Fbluetyson%2FFASERIP-Slugfest%2Fblob%2Fmain%2Fnotebooks%2FFASERIP%2520Character%2520Generator.ipynb)
+
+## Quick Start
+
 ```python
 from DnD_battler import Creature, Encounter
-import pandas as pd
 
-arenaDangerRoom = Encounter(Creature.load("Cyclops"), Creature.load("Corsair"))
+# Load two characters and simulate a battle
+cyclops = Creature.load("Cyclops")
+corsair = Creature.load("Corsair")
+arena = Encounter(cyclops, corsair)
 
-print(arenaDangerRoom.go_to_war(100))
+# Run 100 battles and get statistics
+print(arena.go_to_war(100))
 ```
 
-# Binder link
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bluetyson/FASERIP-Slugfest/HEAD?urlpath=https%3A%2F%2Fgithub.com%2Fbluetyson%2FFASERIP-Slugfest%2Fblob%2Fmain%2FFASERIP%2520Character%2520Generator.ipynb)
-- You can run Simulations and the Character generator here in a Jupyter Hub - download results, etc.  Use the FASERIP Character Generator Notebook, not the test version.  First cell of characters runs 100 of the original style, the second runs in beastiaryFASERIP style for the simulator.
+## Installation
 
-# Simulation
-See https://github.com/bluetyson/FASERIP-Slugfest/blob/main/DnD-battler/README.md for more technical details.
-For developers, the base DnD-battler Simulation module folder is at that level. 
+### From Source
+```bash
+git clone https://github.com/bluetyson/FASERIP-Slugfest.git
+cd FASERIP-Slugfest/DnD-battler
+pip install .
+```
 
-## Discussion
-Some here:- http://cosmicheroes.space/blog/index.php/tag/faserip-slugfest/
+### For Development
+```bash
+pip install -e .
+```
 
-# Character Generator
-Work in progress on an Ultimate Powers Book version - 
-- Notebook here that can do a loop of characters, output to json and make a dataframe and csv that is customised to use with the bestiaryFASERIP.csv type format for FASERIP-Slugfests https://github.com/bluetyson/FASERIP-Slugfest/blob/main/FASERIP%20Character%20Generator.ipynb
-  - work in progress, so will have more columns/attributes added
-- Training-Data parses Ben Riely's character website and creates a csv in beastiaryFASERIP.csv format as above
-- Martial-Artists provides some martial artist analysis similarly.
+### For Notebooks
+```bash
+pip install -r requirements.txt
+```
 
-## Notes on Character Generator
-- There are two Forms - Composite and Compound Form - which basically involve making up multiple characters - may possibly be implemented later, but unlikely. For now I will replace them with Mutants [because X-Men].  For the purposes of tying into a simulation that would be difficult - in programming terms, sub-Creature character objects switching out stats.  Even just for a character generator, annoying.
-- Metamorphic robots can also generate an extra form, this is not currently implemented either.
-- Some types like animal, vegetable, mineral of course would pick something on creation - another could make a customised list for each, same with Extra Parts, others like that.
+## Features
 
-## Notes on Character Parsing
-- To turn a list of 3000 characters with many varied made up things into something a little more standardised, a bit of mapping of some uniques
-  - PowersFix.csv and .txt
-  - TalentsFix.csv
-  - Equipment.csv
-- Probably will do some standardising on Advanced powers, more notes to come here.
-- General theory is to make things more generic as you can, add to the Riely character parser
-- Tweak for new characters you want to use and add code as necessary/request such
+- **Combat Simulator**: Simulate battles between FASERIP characters with detailed combat mechanics
+- **Character Generator**: Create random characters using Ultimate Powers Book rules
+- **Character Database**: Access 3000+ pre-made characters from Ben Riely's Marvel database
+- **Statistical Analysis**: Run thousands of battles to determine win probabilities
+- **Jupyter Notebooks**: Interactive character generation and analysis tools
 
-## Attacking
-- At the moment, assuming Bullseyes are Stuns for faster combat
+## Repository Structure
 
-## Powers Attempted or sort of looked at
-- Generally speaking, must be changed to be spelled like this:
+```
+FASERIP-Slugfest/
+├── DnD-battler/          # Core simulator package
+│   ├── DnD_battler/      # Python package
+│   └── setup.py          # Package installer
+├── examples/             # Example scripts and battles
+├── notebooks/            # Jupyter notebooks for character generation
+├── data/                 # Character data, powers, talents, equipment
+├── olddata/              # Reference data for character generation
+└── Slugfest/             # Additional utilities
+```
+
+## Usage Examples
+
+### Simple Battle
+```bash
+cd examples
+python simple_battle.py
+```
+
+### Character-Specific Battles
+```bash
+python runtestFASERIP-Cyclops.py
+python runtestFASERIP-Wolverine.py
+```
+
+See the [examples/](examples/) directory for more examples including:
+- One vs many battles
+- Martial artist contests
+- Team battles
+- Custom character creation
+
+### Online (No Installation Required)
+Use Binder to run the character generator and simulator in your browser - no installation needed!
+
+## Technical Details
+
+For detailed technical documentation, see [DnD-battler/README.md](DnD-battler/README.md).
+
+## Discussion & Blog
+
+Project updates and discussions: http://cosmicheroes.space/blog/index.php/tag/faserip-slugfest/
+
+## Character Generator
+## Character Generator
+
+The character generator creates random FASERIP characters using Ultimate Powers Book rules.
+
+### Using Notebooks
+
+- **notebooks/FASERIP Character Generator.ipynb** - Main character generator
+  - Creates characters in JSON and CSV formats
+  - Compatible with the simulator's beastiary format
+  - Outputs saved to data/ directory
+
+- **notebooks/FASERIP-Training-Data.ipynb** - Parses Ben Riely's character database
+- **notebooks/FASERIP-Martial_Artists.ipynb** - Martial artist analysis
+
+### Character Generator Notes
+
+- Composite and Compound Forms are replaced with Mutants for simplicity
+- Metamorphic robot extra forms not currently implemented
+- Character data standardized through mapping files (PowersFix.csv, TalentsFix.csv, EquipmentFix.csv)
+
+## Combat Mechanics
+
+### Implemented Powers
+
+The simulator currently supports:
 - Body Armour
-- Claws - generic Edged mapping
-- Energy Absorption [not kinetic]
+- Claws (mapped to generic Edged attacks)
+- Energy Absorption
 - Energy Blast
 - Extra Attacks
-- Extra Body Parts [see above]
 - Force Blast
 - Force Field
-- Hyper-Speed [defensive bonus from moving, can substitute for multiple attacks roll - or just flat out hand out at a level]
-  - This is handled in various ways in character writeups
-  - Generally will lump Lightning Speed and these together in the interests of simplification
+- Hyper-Speed (defensive bonus and multiple attacks)
 - Phasing
-- Power Absorption - just as a takedown
-- Probability Manipulation [just the good side]
+- Power Absorption (as takedown)
+- Probability Manipulation
 - Regeneration
-- Resistances [framework, but not implemented]
+- Resistances (framework in place)
 
-## Equipment Attempted
-- Generally speaking, should transform these into the generic attack types, Shooting, Thrown Edged etc.
-- Blaster Pistols
-- Boomerangs
-- Bows
-- Guns
-- Swords
+### Implemented Equipment
 
-## Other versions
-- Java - You can find a java GUI FASERIP Character Generator at http://sourceforge.net/projects/javamcc/files/JMCC%28betav4.5%29.jar/download
-- Javascript - https://github.com/jinniaflyer450/Jins-FASERIP-Char-Creator
+Equipment is standardized to generic attack types:
+- Blaster Pistols → Shooting
+- Boomerangs → Throwing
+- Bows → Shooting
+- Guns → Shooting
+- Swords → Edged
 
-## Resources
-- FASERIP : https://gurbintrollgames.wordpress.com/faserip/
-- 4CS : https://www.drivethrurpg.com/product/50837/Four-Color-System-Core-Rules
-- Classic Marvel Forever : https://classicmarvelforever.com/
-- DnD Battler : https://github.com/matteoferla/DnD-battler
-- Ben Riely Marvel : https://www.angelfire.com/comics/benriely/index.html
-- Unofficial Canon Project - https://drive.google.com/drive/folders/1B4FIJ1gUksHQFLqrNYZ439JSkpm8uH4U
-- FASERIPing - http://cosmicheroes.space/blog/index.php/tag/faserip/
+### Combat Notes
 
+- Bullseyes are treated as Stuns for faster combat
+- Multi-opponent battles use -4 CS penalty
+- See technical documentation for detailed combat mechanics
 
+## Related Projects
 
+### Other FASERIP Tools
+- **Java**: [FASERIP Character Generator GUI](http://sourceforge.net/projects/javamcc/files/JMCC%28betav4.5%29.jar/download)
+- **JavaScript**: [Jin's FASERIP Char Creator](https://github.com/jinniaflyer450/Jins-FASERIP-Char-Creator)
+
+### Resources
+- [FASERIP RPG](https://gurbintrollgames.wordpress.com/faserip/)
+- [4CS (Four-Color System)](https://www.drivethrurpg.com/product/50837/Four-Color-System-Core-Rules)
+- [Classic Marvel Forever](https://classicmarvelforever.com/)
+- [DnD Battler](https://github.com/matteoferla/DnD-battler) (Original inspiration)
+- [Ben Riely Marvel Database](https://www.angelfire.com/comics/benriely/index.html)
+- [Unofficial Canon Project](https://drive.google.com/drive/folders/1B4FIJ1gUksHQFLqrNYZ439JSkpm8uH4U)
+- [FASERIPing Blog](http://cosmicheroes.space/blog/index.php/tag/faserip/)
+
+## Contributing
+
+Contributions are welcome! Whether you want to:
+- Add new characters to the beastiary
+- Implement additional powers or equipment
+- Fix bugs or improve documentation
+- Share battle results and statistics
+
+Please feel free to open issues or submit pull requests.
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Credits
+
+- Based on [DnD-battler](https://github.com/matteoferla/DnD-battler) by Matteo Ferla
+- Character data from [Ben Riely's Marvel Database](https://www.angelfire.com/comics/benriely/index.html)
+- FASERIP system by TSR/Marvel Super Heroes RPG

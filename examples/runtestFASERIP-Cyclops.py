@@ -1,5 +1,4 @@
 from DnD_battler import Creature, Encounter
-import pandas as pd
 
 arenaDangerRoom = Encounter(Creature.load("Cyclops"), Creature.load("Corsair"))
 arenaDangerRoomNA = Encounter(Creature.load("Cyclops NA"), Creature.load("Corsair NA"))

@@ -1,2 +1,6 @@
-pandas
-tqdm
+# Core dependencies for character generator notebooks
+pandas>=1.0.0
+tqdm>=4.0.0
+
+# Note: The simulator (DnD-battler) has no external dependencies
+# Install it with: cd DnD-battler && pip install -e .
